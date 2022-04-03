@@ -6,7 +6,8 @@
       "files": ["*.ts"],
       "parserOptions": {
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
-        "createDefaultProgram": true
+        "createDefaultProgram": true,
+        "tsconfigRootDir": "/home/leonardo/Documentos/Source/ionic-angular-beginners-crash-course/ionic-angular/ionic-angular-course"
       },
       "extends": [
         "plugin:@angular-eslint/ng-cli-compat",
