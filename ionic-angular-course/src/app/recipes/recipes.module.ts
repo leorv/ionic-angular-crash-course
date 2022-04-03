@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { RecipesPageRoutingModule } from './recipes-routing.module';
 
 import { RecipesPage } from './recipes.page';
+import { RecipesService } from './recipes.service';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { RecipesPage } from './recipes.page';
     IonicModule,
     RecipesPageRoutingModule
   ],
-  declarations: [RecipesPage]
+  declarations: [RecipesPage],
+  providers: [
+      RecipesService
+  ]
 })
 export class RecipesPageModule {}
