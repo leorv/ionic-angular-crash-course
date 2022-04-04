@@ -42,4 +42,8 @@ export class RecipesService {
         //     })
         // };
     }
+
+    deleteRecipe(id: number){
+        this.recipes = this.recipes.filter(recipe => recipe.id !== id);
+    }
 }

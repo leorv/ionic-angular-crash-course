@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Recipe } from '../recipe.model';
@@ -23,6 +23,7 @@ export class RecipeDetailPage implements OnInit {
     subscription: Subscription = new Subscription();
 
     constructor(
+        private router: Router,
         private route: ActivatedRoute,
         private recipesService: RecipesService
     ) {
@@ -44,5 +45,10 @@ export class RecipeDetailPage implements OnInit {
                 this.loadedRecipe = this.recipesService.getRecipe(parseInt(id, 10));
             }
         );
+    }
+
+    onDeleteRecipe(){
+        this.recipesService.deleteRecipe(this.loadedRecipe.id);
+        this.router.navigate(['/']);
     }
 }
