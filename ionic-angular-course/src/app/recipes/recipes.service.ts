@@ -36,5 +36,10 @@ export class RecipesService {
 
     getRecipe(id: number) {
         return {...this.recipes.find(r => r.id === id)};
+        // O mesmo que escrever:
+        // return {...this.recipes.find(recipe => {
+        //     return recipe.id === id;
+        //     })
+        // };
     }
 }
