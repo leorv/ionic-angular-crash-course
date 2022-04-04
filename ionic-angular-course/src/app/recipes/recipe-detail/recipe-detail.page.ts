@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
 import { Recipe } from '../recipe.model';
@@ -11,7 +12,7 @@ import { RecipesService } from './../recipes.service';
     templateUrl: './recipe-detail.page.html',
     styleUrls: ['./recipe-detail.page.scss'],
 })
-export class RecipeDetailPage implements OnInit {
+export class RecipeDetailPage implements OnInit, OnDestroy {
 
     loadedRecipe: Recipe = {
         id: 0,
@@ -25,7 +26,8 @@ export class RecipeDetailPage implements OnInit {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private recipesService: RecipesService
+        private recipesService: RecipesService,
+        private alertCtrl: AlertController
     ) {
     }
 
@@ -39,7 +41,7 @@ export class RecipeDetailPage implements OnInit {
                 // const id: string = params['recipeId'];
                 // O ES Lint gosta da dot notation:
                 const id: string = params.recipeId;
-                if (id == null || id === ''){
+                if (id == null || id === '') {
                     return;
                 }
                 this.loadedRecipe = this.recipesService.getRecipe(parseInt(id, 10));
@@ -47,8 +49,28 @@ export class RecipeDetailPage implements OnInit {
         );
     }
 
-    onDeleteRecipe(){
-        this.recipesService.deleteRecipe(this.loadedRecipe.id);
-        this.router.navigate(['/']);
+    onDeleteRecipe() {
+        this.alertCtrl.create({
+            animated: true,
+            buttons: [{
+                text: 'Cancel',
+                role: 'cancel'
+            },
+            {
+                text: 'Delete',
+                handler: () => {
+                    this.recipesService.deleteRecipe(this.loadedRecipe.id);
+                    this.router.navigate(['/recipes']);
+                }
+            }],
+            header: 'Are you sure?',
+            message: 'Do you really want to delete the recipe?'
+        }).then(alertElement => {
+            alertElement.present();
+        });
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 }
