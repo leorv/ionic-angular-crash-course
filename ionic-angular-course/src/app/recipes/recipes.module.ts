@@ -8,17 +8,20 @@ import { RecipesPageRoutingModule } from './recipes-routing.module';
 
 import { RecipesPage } from './recipes.page';
 import { RecipesService } from './recipes.service';
+import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RecipesPageRoutingModule
-  ],
-  declarations: [RecipesPage],
-  providers: [
-      RecipesService
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RecipesPageRoutingModule
+    ],
+    declarations: [
+        RecipesPage,
+        RecipeItemComponent],
+    providers: [
+        RecipesService
+    ]
 })
-export class RecipesPageModule {}
+export class RecipesPageModule { }

@@ -42,6 +42,7 @@ export class RecipeDetailPage implements OnInit, OnDestroy {
                 // O ES Lint gosta da dot notation:
                 const id: string = params.recipeId;
                 if (id == null || id === '') {
+                    this.router.navigate(['/recipes']);
                     return;
                 }
                 this.loadedRecipe = this.recipesService.getRecipe(parseInt(id, 10));
